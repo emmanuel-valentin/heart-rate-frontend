@@ -1,0 +1,42 @@
+<p-panel header="Registros" [toggleable]="true">
+  <p-table
+    [value]="records"
+    class="p-datatable-lg"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 30, 50]"
+  >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        Registros enviados por el sensor
+        <p-button
+          icon="pi pi-refresh"
+          (onClick)="findRecords()"
+          [disabled]="isLoading"
+        />
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="recordId">Id <p-sortIcon field="recordId" /></th>
+        <th pSortableColumn="recordedAt">
+          Fecha <p-sortIcon field="recordedAt" />
+        </th>
+        <th pSortableColumn="bpmAvg">
+          Bpm <p-sortIcon field="bpmAvg" /> promedio
+        </th>
+        <th pSortableColumn="delta">Delta <p-sortIcon field="delta" /></th>
+      </tr>
+    </ng-template>
+
+    <ng-template style="height: 200px" pTemplate="body" let-record>
+      <tr>
+        <td>{{ record.recordId }}</td>
+        <td>{{ record.recordedAt | date : "fullDate" }}</td>
+        <td>{{ record.bpmAvg }}</td>
+        <td>{{ record.delta }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>
