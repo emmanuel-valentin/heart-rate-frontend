@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://heart-rate-backend.onrender.com',
+  apiUrl: 'http://40.83.249.238:8080',
 };
