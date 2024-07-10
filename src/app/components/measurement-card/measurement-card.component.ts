@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Measurement } from '../../interfaces/measurement.interface';
 import { MeasurementService } from '../../services/measurement.service';
 import { PanelModule } from 'primeng/panel';
@@ -10,7 +10,7 @@ import { PanelModule } from 'primeng/panel';
   templateUrl: './measurement-card.component.html',
   styles: ``
 })
-export class MeasurementCardComponent implements OnInit {
+export class MeasurementCardComponent implements OnInit, OnDestroy {
   public measurement: Measurement = {
     bpmAvg: 0.0,
     delta: 0.0
@@ -22,5 +22,9 @@ export class MeasurementCardComponent implements OnInit {
     this.measurementService.getMeasurement().subscribe((measurement) => {
       this.measurement = measurement;
     })
+  }
+
+  ngOnDestroy(): void {
+    this.measurementService.measurement$.unsubscribe();
   }
 }
